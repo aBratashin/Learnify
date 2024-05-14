@@ -30,7 +30,7 @@ const User: FC<UsersProps> = ({ users }) => {
 		del: boolean = false
 	) => {
 		axios
-			.post('https://learnify-courses.vercel.app/api/userStatus', { role, id, del })
+			.post('/api/userStatus', { role, id, del })
 			.then(() => {
 				toast.success('Аккаунт успешно изменен')
 				router.refresh()

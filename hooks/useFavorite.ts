@@ -32,9 +32,9 @@ const useFavorite = ({ courseId, currentUser }: IUseFavorite) => {
 				let request
 
 				if (hasFavorited) {
-					request = () => axios.delete(`https://learnify-courses.vercel.app/api/favorites/${courseId}`)
+					request = () => axios.delete(`/api/favorites/${courseId}`)
 				} else {
-					request = () => axios.post(`https://learnify-courses.vercel.app/api/favorites/${courseId}`)
+					request = () => axios.post(`/api/favorites/${courseId}`)
 				}
 
 				await request()

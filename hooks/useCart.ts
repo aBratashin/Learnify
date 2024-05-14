@@ -32,9 +32,9 @@ const useCart = ({ courseId, currentUser }: IUseFavorite) => {
 				let request
 
 				if (hasCart) {
-					request = () => axios.delete(`https://learnify-courses.vercel.app/api/cart/${courseId}`)
+					request = () => axios.delete(`/api/cart/${courseId}`)
 				} else {
-					request = () => axios.post(`https://learnify-courses.vercel.app/api/cart/${courseId}`)
+					request = () => axios.post(`/api/cart/${courseId}`)
 				}
 
 				await request()

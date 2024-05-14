@@ -75,10 +75,10 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 
 		try {
 			if (edit) {
-				await axios.post('https://learnify-courses.vercel.app/api/editCourse', { ...courseData, id: course?.id })
+				await axios.post('/api/editCourse', { ...courseData, id: course?.id })
 				toast.success('Курс успешно обновлен')
 			} else {
-				await axios.post('https://learnify-courses.vercel.app/api/course', courseData)
+				await axios.post('/api/course', courseData)
 				toast.success('Курс успешно добавлен')
 			}
 			reset()

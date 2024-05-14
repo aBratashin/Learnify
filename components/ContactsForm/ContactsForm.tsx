@@ -25,7 +25,7 @@ const ContactsForm = () => {
 
 	const onSubmit = async (formData: IContact) => {
 		axios
-			.post('https://learnify-courses.vercel.app/api/contacts', { ...formData })
+			.post('/api/contacts', { ...formData })
 			.then(() => {
 				reset()
 				router.refresh()

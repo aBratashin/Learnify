@@ -60,7 +60,7 @@ const CartList: FC<CartListProps> = ({ products, currentUser }) => {
 
 	const handlePay = async () => {
 		axios
-			.post('https://learnify-courses.vercel.app/api/payment', { total, desc })
+			.post('/api/payment', { total, desc })
 			.then(res => {
 				router.push(res.data.confirmation.confirmation_url)
 			})
