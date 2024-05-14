@@ -64,11 +64,10 @@ const PageProducts = async ({
 		return notFound()
 	}
 
-	const products = await getProductsByCategory({
-		category: page.category
-	})
-
-	const currentUser = await getCurrentUser()
+  const [products, currentUser] = await Promise.all([
+    getProductsByCategory({ category: page.category }),
+    getCurrentUser()
+  ]);
 
 	return <TopPage page={page} products={products} currentUser={currentUser} />
 }
