@@ -1,25 +1,29 @@
 'use client'
 import { ProductModel } from '@/interfaces/product.interface'
 import CourseForm from '@/components/CourseForm/CourseForm'
-import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import NotFound from '../not-found'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Spinner from '@/components/Spinner/Spinner'
 
 const Edit = () => {
-	const search = useSearchParams()
-	const searchQuery = search ? search?.get('q') : null
+	const [searchQuery, setSearchQuery] = useState<string | null>(null)
+	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		setSearchQuery(params.get('q'))
+	}, [])
+
 	const encodedSearch = encodeURI(searchQuery || '')
 
-	const [isLoading, setIsLoading] = useState(true)
 	const { data, error } = useSWR<{ course: ProductModel }>(
-		`https://learnify-courses.vercel.app/api/edit?q=${encodedSearch}`,
+		() => (searchQuery ? `/api/edit?q=${encodedSearch}` : null),
 		async (url: string) => {
 			const response = await fetch(url)
 
 			if (!response.ok) {
-				throw new Error('Не удалось получить курсы')
+				throw new Error('Не удалось получить курс')
 			}
 
 			const data = await response.json()
@@ -28,15 +32,15 @@ const Edit = () => {
 		}
 	)
 
-	// if (isLoading) {
-	// 	return <Spinner />
-	// }
+	if (isLoading) {
+		return <Spinner />
+	}
 
-	// if (!data?.course) {
-	// 	return <NotFound />
-	// }
+	if (!data?.course) {
+		return <NotFound />
+	}
 
-	return <CourseForm edit course={data?.course} />
+	return <CourseForm edit course={data.course} />
 }
 
 export default Edit
