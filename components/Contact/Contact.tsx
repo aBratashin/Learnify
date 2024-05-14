@@ -30,7 +30,7 @@ const Contact: FC<ContactsProps> = ({ contacts }) => {
 		del: boolean = false
 	) => {
 		axios
-			.post('/api/contactStatus', { status, id, del })
+			.post('https://learnify-courses.vercel.app/api/contactStatus', { status, id, del })
 			.then(() => {
 				toast.success('Заявка успешно изменена')
 				router.refresh()

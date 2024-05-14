@@ -21,7 +21,7 @@ export default function Search() {
 	const encodedSearch = encodeURI(searchQuery || '')
 
 	const { data } = useSWR<{ courses: Array<ProductModel> }>(
-		`/api/search?q=${encodedSearch}`,
+		`https://learnify-courses.vercel.app/api/search?q=${encodedSearch}`,
 		fetchCourses
 	)
 

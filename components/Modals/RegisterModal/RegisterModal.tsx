@@ -41,7 +41,7 @@ const RegisterModal = () => {
 		setIsLoading(true)
 
 		axios
-			.post('/api/register', data)
+			.post('https://learnify-courses.vercel.app/api/register', data)
 			.then(() => {
 				registerModal.onClose()
 				toast.success('Вы успешно зарегистрировались!')

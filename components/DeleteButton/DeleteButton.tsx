@@ -15,7 +15,7 @@ const DeleteButton: FC<DeleteButtonProps> = ({ courseId }) => {
 
 	const handleDelete = async (id: string) => {
 		axios
-			.post('/api/manageCourses', { id })
+			.post('https://learnify-courses.vercel.app/api/manageCourses', { id })
 			.then(() => {
 				toast.success('Курс успешно удален')
 				router.refresh()

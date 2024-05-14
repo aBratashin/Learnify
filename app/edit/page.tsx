@@ -14,7 +14,7 @@ const Edit = () => {
 
 	const [isLoading, setIsLoading] = useState(true)
 	const { data, error } = useSWR<{ course: ProductModel }>(
-		`/api/edit?q=${encodedSearch}`,
+		`https://learnify-courses.vercel.app/api/edit?q=${encodedSearch}`,
 		async (url: string) => {
 			const response = await fetch(url)
 

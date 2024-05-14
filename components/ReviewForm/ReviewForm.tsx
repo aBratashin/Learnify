@@ -41,7 +41,7 @@ const ReviewForm: FC<ReviewFormProps> = ({
 		}
 
 		axios
-			.post('/api/review', { ...formData, product_id })
+			.post('https://learnify-courses.vercel.app/api/review', { ...formData, product_id })
 			.then(() => {
 				setIsSuccess(true)
 				router.refresh()
