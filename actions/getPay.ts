@@ -16,7 +16,7 @@ export default async function getPay(sum: number, desc: any[]) {
 		},
 		confirmation: {
 			type: 'redirect',
-			return_url: 'http://localhost:3000/bought'
+			return_url: 'https://learnify-courses.vercel.app/bought'
 		},
 		description: desc
 	})
