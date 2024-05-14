@@ -16,7 +16,7 @@ export default async function getPay(sum: number, desc: any[]) {
 		},
 		confirmation: {
 			type: 'redirect',
-			return_url: process.env['NEXTAUTH_URL'] + 'bougth'
+			return_url: process.env['NEXTAUTH_URL'] + 'bought'
 		},
 		description: desc
 	})
