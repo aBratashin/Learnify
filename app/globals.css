@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	color: #3b434e;
+	background: #f5f6f8;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+	color: #7351f5 !important;
+}

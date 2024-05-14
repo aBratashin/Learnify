@@ -1,0 +1,28 @@
+.wrapper {
+	display: grid;
+	background: #292929;
+	color: white;
+	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
+	gap: 40px 30px;
+	grid-template-areas: '. content content .';
+	z-index: 2;
+}
+
+.content {
+	grid-area: content;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		grid-template-columns: minmax(320px, 1fr);
+		grid-template-areas: 'content';
+	}
+
+	.content {
+		display: block;
+		padding: 20px;
+	}
+}

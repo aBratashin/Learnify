@@ -1,0 +1,35 @@
+.seo {
+	text-align: justify;
+	margin-top: 30px;
+}
+
+.seo h1 {
+	font-weight: 500;
+	font-size: 26px;
+	line-height: 35px;
+	margin: 0 0 30px 0;
+}
+
+.seo h2 {
+	font-weight: 500;
+	font-size: 22px;
+	line-height: 30px;
+	margin: 30px 0;
+}
+
+.seo h3 {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 27px;
+	margin: 30px 0;
+}
+
+.seo li {
+	list-style: circle;
+	margin: 20px 0;
+	margin-left: 20px;
+}
+
+.seo li::first-letter {
+	text-transform: uppercase;
+}

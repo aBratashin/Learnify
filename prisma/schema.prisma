@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  User
+  Admin
+}
+
+model User {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  name                String?
+  email               String?  @unique
+  emailVerified       DateTime?
+  image               String?
+  hashedPassword      String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  favoriteIds         String[] @db.ObjectId
+  cartIds             String[] @db.ObjectId
+  boughtIds           String[] @db.ObjectId
+  role                UserStatus @default(User)
+  
+  accounts            Account[]
+}
+
+model Account {
+  id                  String @id @default(auto()) @map("_id") @db.ObjectId
+  userId              String @db.ObjectId
+  type                String
+  provider            String
+  providerAccountId   String
+  refresh_token       String? @db.String
+  access_token        String? @db.String
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String? @db.String
+  session_state       String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Course {
+  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+  categories       String[]
+  tags             String[]
+  title            String
+  link             String
+  image            String
+  initialRating    Float
+  price            Int
+  oldPrice         Int
+  credit           Int
+  description      String?
+  advantages       String?
+  disAdvantages    String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  html             String?
+  companyId        String?          @map("companyId")
+  clicks           Int?
+  reviewCount      Int
+  reviewAvg        Float?
+  characteristics  Json[]
+  reviews          Review[]        @relation("ReviewCourse")
+}
+
+model Review {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  title        String
+  description  String
+  rating       Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  courseId     String   @db.ObjectId
+  course       Course   @relation("ReviewCourse", fields: [courseId], references: [id])
+}
+
+enum ContactStatus {
+  Pending
+  Confirmed
+  Cancelled
+}
+
+model Contacts {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  phone        String
+  email        String
+  status       ContactStatus @default(Pending)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Page {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  tags            String[]
+  firstCategory   Int
+  secondCategory  String
+  alias           String
+  title           String
+  category        String
+  tagsTitle       String
+  metaTitle       String
+  metaDescription String
+  advantages      Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  seoText         String?
+  hh              Json?
+  qas             Json?
+  addresses       String[]
+  categoryOn      String
+  blog            Json?
+  sravnikus       Json?
+  learningclub    Json?
+}
