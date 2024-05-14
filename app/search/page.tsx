@@ -26,7 +26,7 @@ export default function Search() {
 	const encodedSearch = encodeURI(searchQuery || '')
 
 	const { data } = useSWR<{ courses: Array<ProductModel> }>(
-		() => (searchQuery ? `http://localhost:3000/api/search?q=${encodedSearch}` : null),
+		() => (searchQuery ? `/api/search?q=${encodedSearch}` : null),
 		fetchCourses
 	)
 
