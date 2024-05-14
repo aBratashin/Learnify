@@ -25,9 +25,9 @@ export default function Search() {
 		fetchCourses
 	)
 
-	if (!data?.courses) {
-		return <Loading />
-	}
+	// if (!data?.courses) {
+	// 	return <Loading />
+	// }
 
-	return <SearchList products={data.courses} title={searchQuery} />
+	return <SearchList products={data?.courses || []} title={searchQuery} />
 }
