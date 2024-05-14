@@ -28,15 +28,15 @@ const Edit = () => {
 		}
 	)
 
-	if (isLoading) {
-		return <Spinner />
-	}
+	// if (isLoading) {
+	// 	return <Spinner />
+	// }
 
-	if (!data?.course) {
-		return <NotFound />
-	}
+	// if (!data?.course) {
+	// 	return <NotFound />
+	// }
 
-	return <CourseForm edit course={data.course} />
+	return <CourseForm edit course={data?.course} />
 }
 
 export default Edit
