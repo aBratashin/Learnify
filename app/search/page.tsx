@@ -2,8 +2,8 @@
 import { ProductModel } from '@/interfaces/product.interface'
 import SearchList from '@/components/SearchList/SearchList'
 import useSWR from 'swr'
-import Loading from './loading'
 import { useEffect, useState } from 'react'
+import Spinner from '@/components/Spinner/Spinner'
 
 const fetchCourses = async (url: string) => {
 	const response = await fetch(url)
@@ -31,7 +31,7 @@ export default function Search() {
 	)
 
 	if (!data?.courses) {
-		return <Loading />
+		return <Spinner />
 	}
 
 	return <SearchList products={data.courses} title={searchQuery} />
