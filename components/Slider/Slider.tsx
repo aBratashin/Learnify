@@ -18,7 +18,7 @@ export default function Slider() {
 	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperTypes | null>(null)
 
 	return (
-		<section className='min-h-20vh mt-[6px]'>
+		<section className='min-h-20vh'>
 			<div className='container'>
 				<Swiper
 					loop={true}

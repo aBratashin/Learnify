@@ -6,12 +6,14 @@ import Slider from '@/components/Slider/Slider'
 
 export default function Home() {
 	return (
-		<div className='flex flex-col gap-20'>
+		<div className='flex flex-col gap-[30px]'>
 			<H tag='h1'>Главная</H>
-			<Slider />
-			<Capability />
-			<About />
-			<ContactsForm />
+			<div className='flex flex-col gap-20'>
+				<Slider />
+				<Capability />
+				<About />
+				<ContactsForm />
+			</div>
 		</div>
 	)
 }

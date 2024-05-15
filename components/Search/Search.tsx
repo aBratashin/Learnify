@@ -1,12 +1,12 @@
 'use client'
+import Button from '@/components/Button/Button'
+import Input from '@/components/Input/Input'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
 import React, { FC, useState } from 'react'
 import { SearchProps } from './Search.props'
-import classNames from 'classnames'
-import Input from '@/components/Input/Input'
-import Button from '@/components/Button/Button'
-import GlassIcon from './glass.svg'
-import { useRouter } from 'next/navigation'
 import { cvaSearchButton, cvaSearchForm, cvaSearchInput } from './SearchStyle'
+import GlassIcon from './glass.svg'
 
 const Search: FC<SearchProps> = ({
 	className,
@@ -28,7 +28,7 @@ const Search: FC<SearchProps> = ({
 	}
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (!manage && e.key == 'Enter') {
+		if (!manage && e.key === 'Enter') {
 			goToSearch(e)
 		}
 	}
