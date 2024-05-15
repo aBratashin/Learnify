@@ -1,12 +1,16 @@
-'use client'
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
+import { useForm } from 'react-hook-form'
 import { SearchProps } from './Search.props'
 import { cvaSearchButton, cvaSearchForm, cvaSearchInput } from './SearchStyle'
 import GlassIcon from './glass.svg'
+
+interface IFormInput {
+	search: string
+}
 
 const Search: FC<SearchProps> = ({
 	className,
@@ -15,21 +19,13 @@ const Search: FC<SearchProps> = ({
 	onChange,
 	...props
 }) => {
-	const [search, setSearch] = useState<string>('')
-
+	const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>()
 	const router = useRouter()
 
-	const goToSearch = (e: React.FormEvent) => {
-		e.preventDefault()
+	const goToSearch = (data: IFormInput) => {
 		if (!manage) {
-			const encodedSearch = encodeURI(search)
+			const encodedSearch = encodeURI(data.search)
 			router.push(`/search?q=${encodedSearch}`)
-		}
-	}
-
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (!manage && e.key === 'Enter') {
-			goToSearch(e)
 		}
 	}
 
@@ -38,14 +34,13 @@ const Search: FC<SearchProps> = ({
 			className={classNames(className, [cvaSearchForm()])}
 			{...props}
 			role='search'
-			onSubmit={goToSearch}
+			onSubmit={handleSubmit(goToSearch)}
 		>
 			<Input
 				className={cvaSearchInput()}
 				placeholder={'Поиск...'}
-				value={manage ? value : search}
-				onChange={manage ? onChange : e => setSearch(e.target.value)}
-				onKeyDown={handleKeyDown}
+				{...register('search', { required: { value: true, message: 'Поле не может быть пустым' } })}
+				error={errors.search}
 			/>
 			<Button
 				className={cvaSearchButton()}
