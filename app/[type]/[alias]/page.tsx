@@ -1,11 +1,13 @@
-import getProductsByCategory from '@/actions/getProductsByCategory'
 import getCurrentUser from '@/actions/getCurrentUser'
 import getPage from '@/actions/getPage'
+import getProductsByCategory from '@/actions/getProductsByCategory'
+import Spinner from '@/components/Spinner/Spinner'
 import TopPage from '@/components/top-page/TopPage'
 import { MenuData } from '@/helpers/MenuData'
 import { firstLevelMenu } from '@/helpers/helpers'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
 export async function generateMetadata({
 	params
@@ -64,12 +66,22 @@ const PageProducts = async ({
 		return notFound()
 	}
 
-  const [products, currentUser] = await Promise.all([
-    getProductsByCategory({ category: page.category }),
-    getCurrentUser()
-  ]);
+	const [products, currentUser] = await Promise.all([
+		getProductsByCategory({ category: page.category }),
+		getCurrentUser()
+	])
 
 	return <TopPage page={page} products={products} currentUser={currentUser} />
 }
 
-export default PageProducts
+const PageProductsWrapper = (props: {
+	params: { type: string; alias: string }
+}) => {
+	return (
+		<Suspense fallback={<Spinner />}>
+			<PageProducts {...props} />
+		</Suspense>
+	)
+}
+
+export default PageProductsWrapper
