@@ -26,6 +26,10 @@ const EditResults = () => {
 		fetchCourses
 	)
 
+	if (searchQuery === null) {
+		return <NotFound />
+	}
+
 	if (error) {
 		return <NotFound />
 	}

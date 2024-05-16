@@ -1,4 +1,3 @@
-'use client'
 import Spinner from '@/components/Spinner/Spinner'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
