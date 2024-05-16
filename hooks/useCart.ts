@@ -36,16 +36,15 @@ const useCart = ({ courseId, currentUser }: IUseFavorite) => {
 				request = () => axios.post(`/api/cart/${courseId}`)
 			}
 
-			toast.promise(
-				request(),
-				{
+			toast
+				.promise(request(), {
 					loading: 'Обновление...',
 					success: 'Корзина обновлена',
 					error: 'Что-то пошло не так!'
-				}
-			).then(() => {
-				router.refresh()
-			})
+				})
+				.then(() => {
+					router.refresh()
+				})
 		},
 		[courseId, currentUser, hasCart, loginModal, router]
 	)

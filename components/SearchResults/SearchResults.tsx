@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '@/app/not-found'
 import SearchList from '@/components/SearchList/SearchList'
 import Spinner from '@/components/Spinner/Spinner'
 import { ProductModel } from '@/interfaces/product.interface'
@@ -24,6 +25,10 @@ function SearchResults() {
 		() => (searchQuery ? `/api/search?q=${encodedSearch}` : null),
 		fetchCourses
 	)
+
+	if (searchQuery === null) {
+		return <NotFound />
+	}
 
 	if (!data?.courses) {
 		return <Spinner />

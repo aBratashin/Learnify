@@ -224,7 +224,7 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 							{...register('duration', {
 								required: {
 									value: true,
-									message: 'Заполните длительность (кол-во месяцев)'
+									message: 'Заполните длительность'
 								}
 							})}
 							placeholder='Длительность (кол-во месяцев)'

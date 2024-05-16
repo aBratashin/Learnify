@@ -38,8 +38,6 @@ const EditResults = () => {
 		return <Spinner />
 	}
 
-	console.log(data.course)
-
 	return <CourseForm edit course={data.course} />
 }
 

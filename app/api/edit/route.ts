@@ -22,6 +22,9 @@ export async function GET(req: Request) {
 
 		return NextResponse.json({ course })
 	} catch (error) {
-		return NextResponse.json({ error: 'Ошибка обработки запроса' }, { status: 400 })
+		return NextResponse.json(
+			{ error: 'Ошибка обработки запроса' },
+			{ status: 400 }
+		)
 	}
 }

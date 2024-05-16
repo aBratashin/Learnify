@@ -5,4 +5,4 @@ services:
     container_name: learnify
     restart: always
     ports:
-      - "3000:3000"
+      - '3000:3000'

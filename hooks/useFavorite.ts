@@ -36,16 +36,15 @@ const useFavorite = ({ courseId, currentUser }: IUseFavorite) => {
 				request = () => axios.post(`/api/favorites/${courseId}`)
 			}
 
-			toast.promise(
-				request(),
-				{
+			toast
+				.promise(request(), {
 					loading: 'Обновление...',
 					success: 'Избранное обновлено',
 					error: 'Что-то пошло не так!'
-				}
-			).then(() => {
-				router.refresh()
-			})
+				})
+				.then(() => {
+					router.refresh()
+				})
 		},
 		[courseId, currentUser, hasFavorited, loginModal, router]
 	)
