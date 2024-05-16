@@ -8,12 +8,7 @@ import { ru } from 'date-fns/locale'
 import Rating from '@/components/Rating/Rating'
 import DeleteButton from '../DeleteButton/DeleteButton'
 
-const Review: FC<ReviewProps> = ({
-	review,
-	manage,
-	className,
-	...props
-}) => {
+const Review: FC<ReviewProps> = ({ review, manage, className, ...props }) => {
 	const { id, name, title, description, createdAt, rating } = review
 
 	return (

@@ -1,85 +1,64 @@
-.reviewForm {
+.review {
+	display: grid;
+	grid-template-columns: [start] auto 1fr auto auto [end];
+	align-items: center;
+	gap: 10px;
 	font-size: 14px;
 	line-height: 24px;
+}
 
+.reviewAdmin {
 	display: grid;
-	grid-template-columns: [start] auto 1fr auto [end];
-	gap: 20px 30px;
+	grid-template-columns: [start] auto 1fr auto auto [delstart] auto [end];
 	align-items: center;
+	gap: 10px;
+	font-size: 14px;
+	line-height: 24px;
 }
 
 .description {
-	overflow-wrap: break-word !important;
-}
-
-.description,
-.submit {
 	grid-column: start / end;
+	text-align: justify;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
 }
 
-.title {
-	justify-self: left;
+.date {
+	margin-right: 10px;
 }
 
-.submit {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-}
-
-.rating {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 20px;
-}
-
-.panel {
-	padding: 20px;
-	position: relative;
-	border-radius: 5px;
-	margin-top: 20px;
-}
-
-.success {
-	background: #c8f8e4;
-}
-
-.error {
-	background: #fc836d;
-}
-
-.successTitle {
+.name {
 	font-weight: bold;
 }
 
-.close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	border: none;
-	background: none;
+.heart {
+	grid-column: delstart / end;
 }
 
-.error .close path {
-	stroke: #de0000;
-}
-
-@media screen and (max-width: 1100px) {
-	.reviewForm {
-		grid-template-columns: [start] 1fr 1fr [end];
+@media screen and (max-width: 860px) {
+	.review {
+		grid-template-columns: [start] 30px [titlestart] auto [dateend] 1fr [end];
 	}
 
 	.title {
-		justify-self: normal;
+		grid-column: titlestart / end;
+	}
+
+	.date {
+		grid-column: start / dateend;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.date {
+		grid-column: start / end;
 	}
 
 	.rating {
 		grid-column: start / end;
 	}
-}
 
-@media screen and (max-width: 860px) {
-	.reviewForm {
-		grid-template-columns: [start] 1fr [end];
+	.heart {
+		grid-column: start / end;
 	}
 }
