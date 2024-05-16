@@ -29,15 +29,16 @@ const User: FC<UsersProps> = ({ users }) => {
 		id: string,
 		del: boolean = false
 	) => {
-		axios
-			.post('/api/userStatus', { role, id, del })
-			.then(() => {
-				toast.success('Аккаунт успешно изменен')
-				router.refresh()
+		try {
+			await toast.promise(axios.post('/api/userStatus', { role, id, del }), {
+				loading: 'Изменение аккаунта...',
+				success: 'Аккаунт успешно изменен',
+				error: 'Что-то пошло не так'
 			})
-			.catch(() => {
-				toast.error('Что-то пошло не так')
-			})
+			router.refresh()
+		} catch (error) {
+			console.error('Произошла ошибка:', error)
+		}
 	}
 
 	const setSort = (sort: UserSortEnum) => {

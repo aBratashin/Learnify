@@ -29,15 +29,20 @@ const Contact: FC<ContactsProps> = ({ contacts }) => {
 		id: string,
 		del: boolean = false
 	) => {
-		axios
-			.post('/api/contactStatus', { status, id, del })
-			.then(() => {
-				toast.success('Заявка успешно изменена')
+		const changeStatusPromise = axios.post('/api/contactStatus', {
+			status,
+			id,
+			del
+		})
+
+		toast.promise(changeStatusPromise, {
+			loading: 'Изменение статуса...',
+			success: () => {
 				router.refresh()
-			})
-			.catch(() => {
-				toast.error('Что-то пошло не так')
-			})
+				return 'Заявка успешно изменена'
+			},
+			error: 'Что-то пошло не так'
+		})
 	}
 
 	const setSort = (sort: ContactSortEnum) => {

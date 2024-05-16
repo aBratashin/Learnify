@@ -73,22 +73,22 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 			]
 		}
 
-		try {
-			if (edit) {
-				await axios.post('/api/editCourse', { ...courseData, id: course?.id })
-				toast.success('Курс успешно обновлен')
-			} else {
-				await axios.post('/api/course', courseData)
-				toast.success('Курс успешно добавлен')
-			}
-			reset()
-			setDocumentType(null)
-			setValue('image', null)
-			setValue('categories', [])
-			router.refresh()
-		} catch (error) {
-			toast.error('Что-то пошло не так')
-		}
+		const submitPromise = edit
+			? axios.post('/api/editCourse', { ...courseData, id: course?.id })
+			: axios.post('/api/course', courseData)
+
+		toast.promise(submitPromise, {
+			loading: 'Отправка данных курса...',
+			success: () => {
+				reset()
+				setDocumentType(null)
+				setValue('image', null)
+				setValue('categories', [])
+				router.refresh()
+				return edit ? 'Курс успешно обновлен' : 'Курс успешно добавлен'
+			},
+			error: 'Что-то пошло не так'
+		})
 	}
 
 	const extractNumbersFromString = (str: string) => {

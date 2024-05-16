@@ -13,16 +13,15 @@ interface DeleteButtonProps {
 const DeleteButton: FC<DeleteButtonProps> = ({ courseId }) => {
 	const router = useRouter()
 
-	const handleDelete = async (id: string) => {
-		axios
-			.post('/api/manageCourses', { id })
-			.then(() => {
-				toast.success('Курс успешно удален')
+	const handleDelete = (id: string) => {
+		toast.promise(axios.post('/api/manageCourses', { id }), {
+			loading: 'Удаление...',
+			success: () => {
 				router.refresh()
-			})
-			.catch(() => {
-				toast.error('Что-то пошло не так')
-			})
+				return 'Курс успешно удален'
+			},
+			error: 'Что-то пошло не так'
+		})
 	}
 
 	return (

@@ -21,28 +21,31 @@ const useFavorite = ({ courseId, currentUser }: IUseFavorite) => {
 	}, [currentUser, courseId])
 
 	const toggleFavorite = useCallback(
-		async (e: React.MouseEvent<HTMLDivElement>) => {
+		(e: React.MouseEvent<HTMLDivElement>) => {
 			e.stopPropagation()
 
 			if (!currentUser) {
 				return loginModal.onOpen()
 			}
 
-			try {
-				let request
+			let request
 
-				if (hasFavorited) {
-					request = () => axios.delete(`/api/favorites/${courseId}`)
-				} else {
-					request = () => axios.post(`/api/favorites/${courseId}`)
-				}
-
-				await request()
-				router.refresh()
-				toast.success('Избранное обновлено')
-			} catch {
-				toast.error('Что-то пошло не так!')
+			if (hasFavorited) {
+				request = () => axios.delete(`/api/favorites/${courseId}`)
+			} else {
+				request = () => axios.post(`/api/favorites/${courseId}`)
 			}
+
+			toast.promise(
+				request(),
+				{
+					loading: 'Обновление...',
+					success: 'Избранное обновлено',
+					error: 'Что-то пошло не так!'
+				}
+			).then(() => {
+				router.refresh()
+			})
 		},
 		[courseId, currentUser, hasFavorited, loginModal, router]
 	)

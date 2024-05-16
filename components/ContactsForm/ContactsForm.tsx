@@ -24,16 +24,17 @@ const ContactsForm = () => {
 	const router = useRouter()
 
 	const onSubmit = async (formData: IContact) => {
-		axios
-			.post('/api/contacts', { ...formData })
-			.then(() => {
+		const submitPromise = axios.post('/api/contacts', { ...formData })
+
+		toast.promise(submitPromise, {
+			loading: 'Отправка заявки...',
+			success: () => {
 				reset()
 				router.refresh()
-				toast.success('Ваша заявка принята')
-			})
-			.catch(() => {
-				toast.error('Что-то пошло не так')
-			})
+				return 'Ваша заявка принята'
+			},
+			error: 'Что-то пошло не так'
+		})
 	}
 
 	return (

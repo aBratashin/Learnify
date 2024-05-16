@@ -21,28 +21,31 @@ const useCart = ({ courseId, currentUser }: IUseFavorite) => {
 	}, [currentUser, courseId])
 
 	const toggleCart = useCallback(
-		async (e: React.MouseEvent<HTMLButtonElement>) => {
+		(e: React.MouseEvent<HTMLButtonElement>) => {
 			e.stopPropagation()
 
 			if (!currentUser) {
 				return loginModal.onOpen()
 			}
 
-			try {
-				let request
+			let request
 
-				if (hasCart) {
-					request = () => axios.delete(`/api/cart/${courseId}`)
-				} else {
-					request = () => axios.post(`/api/cart/${courseId}`)
-				}
-
-				await request()
-				router.refresh()
-				toast.success('Корзина обновлена')
-			} catch {
-				toast.error('Что-то пошло не так!')
+			if (hasCart) {
+				request = () => axios.delete(`/api/cart/${courseId}`)
+			} else {
+				request = () => axios.post(`/api/cart/${courseId}`)
 			}
+
+			toast.promise(
+				request(),
+				{
+					loading: 'Обновление...',
+					success: 'Корзина обновлена',
+					error: 'Что-то пошло не так!'
+				}
+			).then(() => {
+				router.refresh()
+			})
 		},
 		[courseId, currentUser, hasCart, loginModal, router]
 	)
