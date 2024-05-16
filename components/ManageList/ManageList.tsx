@@ -48,14 +48,6 @@ const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 		dispatchSort({ type: 'reset', initialState: products })
 	}, [products])
 
-	if (products.length === 0) {
-		return (
-			<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center'>
-				<h1 className='font-bold text-2xl'>Список курсов пуст!</h1>
-			</div>
-		)
-	}
-
 	return (
 		<div className='flex flex-col'>
 			<div className='grid grid-cols-[auto,1fr] items-center justify-items-start gap-5 mb-[30px] sm:grid-cols-[auto,1fr,auto]'>
@@ -77,18 +69,29 @@ const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 				onChange={handleSearch}
 				className='!w-[200px] self-start sm:self-end'
 			/>
-			<div role='list'>
-				{filteredProducts.map(p => (
-					<Product
-						role='listitem'
-						layout={shouldReduceMotion ? false : true}
-						key={p.id}
-						product={p}
-						currentUser={currentUser}
-						manage
-					/>
-				))}
-			</div>
+			{filteredProducts.length ? (
+				<div role='list'>
+					{filteredProducts.map(p => (
+						<Product
+							role='listitem'
+							layout={shouldReduceMotion ? false : true}
+							key={p.id}
+							product={p}
+							currentUser={currentUser}
+							manage
+						/>
+					))}
+				</div>
+			) : (
+				<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center mt-96'>
+					<h1 className='font-bold text-2xl'>
+						По Вашему запросу ничего не найдено!
+					</h1>
+					<h2 className='font-normal text-md'>
+						Попробуйте поменять параметры поиска
+					</h2>
+				</div>
+			)}
 		</div>
 	)
 }
