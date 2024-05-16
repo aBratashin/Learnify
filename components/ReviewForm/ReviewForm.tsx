@@ -57,7 +57,8 @@ const ReviewForm: FC<ReviewFormProps> = ({
 			<div className={classNames(classes.reviewForm, className)} {...props}>
 				<Input
 					{...register('name', {
-						required: { value: true, message: 'Заполните имя' }
+						required: { value: true, message: 'Заполните имя' },
+						maxLength: { value: 10, message: 'Макс длина - 10 символов' }
 					})}
 					placeholder='Имя'
 					error={errors.name}
@@ -66,7 +67,8 @@ const ReviewForm: FC<ReviewFormProps> = ({
 				/>
 				<Input
 					{...register('title', {
-						required: { value: true, message: 'Заполните заголовок' }
+						required: { value: true, message: 'Заполните заголовок' },
+						maxLength: { value: 10, message: 'Макс. длина - 10 символов' }
 					})}
 					placeholder='Заголовок отзыва'
 					className={classes.title}
@@ -94,7 +96,8 @@ const ReviewForm: FC<ReviewFormProps> = ({
 				</div>
 				<Textarea
 					{...register('description', {
-						required: { value: true, message: 'Заполните текст' }
+						required: { value: true, message: 'Заполните текст' },
+						maxLength: { value: 1000, message: 'Макс. длина - 1000 символов' }
 					})}
 					placeholder='Текст отзыва'
 					className={classes.description}

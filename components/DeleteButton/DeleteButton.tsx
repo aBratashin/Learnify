@@ -7,18 +7,20 @@ import toast from 'react-hot-toast'
 import { MdDelete } from 'react-icons/md'
 
 interface DeleteButtonProps {
-	courseId: string
+	id: string
+	isReview?: boolean
 }
 
-const DeleteButton: FC<DeleteButtonProps> = ({ courseId }) => {
+const DeleteButton: FC<DeleteButtonProps> = ({ id, isReview = false }) => {
 	const router = useRouter()
 
-	const handleDelete = (id: string) => {
-		toast.promise(axios.post('/api/manageCourses', { id }), {
+	const handleDelete = (itemId: string) => {
+		const apiEndpoint = isReview ? '/api/deleteReview' : '/api/manageCourses'
+		toast.promise(axios.post(apiEndpoint, { id: itemId }), {
 			loading: 'Удаление...',
 			success: () => {
 				router.refresh()
-				return 'Курс успешно удален'
+				return isReview ? 'Отзыв успешно удален' : 'Курс успешно удален'
 			},
 			error: 'Что-то пошло не так'
 		})
@@ -26,10 +28,10 @@ const DeleteButton: FC<DeleteButtonProps> = ({ courseId }) => {
 
 	return (
 		<div
-			onClick={() => handleDelete(courseId)}
+			onClick={() => handleDelete(id)}
 			className='relative hover:opacity-80 transition cursor-pointer'
-			title='Удалить курс'
-			aria-label='Удалить курс'
+			title={isReview ? 'Удалить отзыв' : 'Удалить курс'}
+			aria-label={isReview ? 'Удалить отзыв' : 'Удалить курс'}
 		>
 			<MdDelete size={30} className='text-red-light' />
 		</div>

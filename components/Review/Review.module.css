@@ -1,45 +1,85 @@
-.review {
-	display: grid;
-	grid-template-columns: [start] auto 1fr auto auto [end];
-	align-items: center;
-	gap: 10px;
+.reviewForm {
 	font-size: 14px;
 	line-height: 24px;
+
+	display: grid;
+	grid-template-columns: [start] auto 1fr auto [end];
+	gap: 20px 30px;
+	align-items: center;
 }
 
 .description {
+	overflow-wrap: break-word !important;
+}
+
+.description,
+.submit {
 	grid-column: start / end;
-	text-align: justify;
 }
 
-.date {
-	margin-right: 10px;
+.title {
+	justify-self: left;
 }
 
-.name {
+.submit {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.rating {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 20px;
+}
+
+.panel {
+	padding: 20px;
+	position: relative;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+.success {
+	background: #c8f8e4;
+}
+
+.error {
+	background: #fc836d;
+}
+
+.successTitle {
 	font-weight: bold;
 }
 
-@media screen and (max-width: 640px) {
-	.review {
-		grid-template-columns: [start] 30px [titlestart] auto [dateend] 1fr [end];
+.close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	border: none;
+	background: none;
+}
+
+.error .close path {
+	stroke: #de0000;
+}
+
+@media screen and (max-width: 1100px) {
+	.reviewForm {
+		grid-template-columns: [start] 1fr 1fr [end];
 	}
 
 	.title {
-		grid-column: titlestart / end;
-	}
-
-	.date {
-		grid-column: start / dateend;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	.date {
-		grid-column: start / end;
+		justify-self: normal;
 	}
 
 	.rating {
 		grid-column: start / end;
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.reviewForm {
+		grid-template-columns: [start] 1fr [end];
 	}
 }
