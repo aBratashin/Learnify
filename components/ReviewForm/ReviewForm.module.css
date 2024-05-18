@@ -8,6 +8,10 @@
 	align-items: center;
 }
 
+.description {
+	overflow-wrap: break-word !important;
+}
+
 .description,
 .submit {
 	grid-column: start / end;
@@ -74,7 +78,7 @@
 	}
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 860px) {
 	.reviewForm {
 		grid-template-columns: [start] 1fr [end];
 	}

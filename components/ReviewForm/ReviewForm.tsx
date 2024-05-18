@@ -61,6 +61,7 @@ const ReviewForm: FC<ReviewFormProps> = ({
 						maxLength: { value: 10, message: 'Макс длина - 10 символов' }
 					})}
 					placeholder='Имя'
+					className={'[&>input]:w-full'}
 					error={errors.name}
 					tabIndex={isOpened ? 0 : -1}
 					aria-invalid={errors.name ? true : false}
@@ -71,7 +72,7 @@ const ReviewForm: FC<ReviewFormProps> = ({
 						maxLength: { value: 10, message: 'Макс. длина - 10 символов' }
 					})}
 					placeholder='Заголовок отзыва'
-					className={classes.title}
+					className={'[&>input]:w-full'}
 					error={errors.title}
 					tabIndex={isOpened ? 0 : -1}
 					aria-invalid={errors.title ? true : false}
