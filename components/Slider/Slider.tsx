@@ -19,7 +19,7 @@ export default function Slider() {
 
 	return (
 		<section className='min-h-20vh'>
-			<div className='container'>
+			<div className='container my-0 mx-auto'>
 				<Swiper
 					loop={true}
 					spaceBetween={10}
