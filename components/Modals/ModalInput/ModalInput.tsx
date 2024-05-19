@@ -94,7 +94,7 @@ const ModalInput: FC<InputProps> = ({
         ${errors[id] ? 'focus:border-red-light' : 'focus:border-black'}`}
 				/>
 			</div>
-			<div className='absolute top-24 right-0 text-red-light'>
+			<div className='self-center text-red-light'>
 				{errors[id] && <>{errors[id]?.message}</>}
 			</div>
 		</div>
