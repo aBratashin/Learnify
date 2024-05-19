@@ -40,16 +40,18 @@ const RegisterModal = () => {
 	const onSubmit: SubmitHandler<FieldValues> = data => {
 		setIsLoading(true)
 
-		axios
-			.post('/api/register', data)
-			.then(() => {
-				registerModal.onClose()
-				toast.success('Вы успешно зарегистрировались!')
-				loginModal.onOpen()
-			})
-			.catch(() => {
-				toast.error('Что-то пошло не так')
-			})
+		toast
+			.promise(
+				axios.post('/api/register', data).then(() => {
+					registerModal.onClose()
+					loginModal.onOpen()
+				}),
+				{
+					loading: 'Регистрация...',
+					success: 'Вы успешно зарегистрировались!',
+					error: 'Что-то пошло не так'
+				}
+			)
 			.finally(() => {
 				setIsLoading(false)
 			})

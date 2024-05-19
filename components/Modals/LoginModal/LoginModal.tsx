@@ -39,22 +39,28 @@ const LoginModal = () => {
 	const onSubmit: SubmitHandler<FieldValues> = data => {
 		setIsLoading(true)
 
-		signIn('credentials', {
-			...data,
-			redirect: false
-		}).then(callback => {
-			setIsLoading(false)
+		toast.promise(
+			signIn('credentials', {
+				...data,
+				redirect: false
+			}).then(callback => {
+				setIsLoading(false)
 
-			if (callback?.ok) {
-				toast.success('Вы успешно авторизовались!')
-				router.refresh()
-				loginModal.onClose()
-			}
+				if (callback?.ok) {
+					router.refresh()
+					loginModal.onClose()
+				}
 
-			if (callback?.error) {
-				toast.error(callback.error)
+				if (callback?.error) {
+					toast.error(callback.error)
+				}
+			}),
+			{
+				loading: 'Авторизация...',
+				success: 'Вы успешно авторизовались!',
+				error: 'Ошибка при авторизации'
 			}
-		})
+		)
 	}
 
 	const bodyContent = (
