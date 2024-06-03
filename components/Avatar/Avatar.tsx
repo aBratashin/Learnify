@@ -1,12 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import AvatarIcon from './avatar.svg'
 import { FC } from 'react'
-
-interface AvatarProps {
-	src: string | null | undefined
-}
+import { AvatarProps } from './Avatar.props'
+import AvatarIcon from './avatar.svg'
 
 const Avatar: FC<AvatarProps> = ({ src }) => {
 	if (src) {

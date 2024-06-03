@@ -1,18 +1,12 @@
 'use client'
 
 import { FC } from 'react'
-
-interface MenuItemProps {
-	onClick: () => void
-	label: string
-}
+import { MenuItemProps } from './MenuItem.props'
+import { cvaWrapper } from './MenuItemStyle'
 
 const MenuItem: FC<MenuItemProps> = ({ onClick, label }) => {
 	return (
-		<div
-			onClick={onClick}
-			className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-		>
+		<div onClick={onClick} className={cvaWrapper()}>
 			{label}
 		</div>
 	)

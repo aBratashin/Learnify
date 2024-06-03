@@ -1,15 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import { MdEdit } from 'react-icons/md'
 import Button from '../Button/Button'
-import { useRouter } from 'next/navigation'
+import { EditButtonProps } from './EditButton.props'
+import { cvaWrapper } from './EditButtonStyle'
 
-interface CartButtonProps {
-	courseId: string
-}
-
-const CartButton: FC<CartButtonProps> = ({ courseId }) => {
+const EditButton: FC<EditButtonProps> = ({ courseId }) => {
 	const router = useRouter()
 
 	const handleEdit = () => {
@@ -19,7 +17,7 @@ const CartButton: FC<CartButtonProps> = ({ courseId }) => {
 	return (
 		<Button
 			onClick={handleEdit}
-			className='hover:opacity-80 transition cursor-pointer gap-2 w-full'
+			className={cvaWrapper()}
 			appearance='primary'
 			aria-label='Редактирование курс'
 		>
@@ -29,4 +27,4 @@ const CartButton: FC<CartButtonProps> = ({ courseId }) => {
 	)
 }
 
-export default CartButton
+export default EditButton

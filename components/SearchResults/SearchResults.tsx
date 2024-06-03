@@ -4,7 +4,9 @@ import SearchList from '@/components/SearchList/SearchList'
 import Spinner from '@/components/Spinner/Spinner'
 import { ProductModel } from '@/interfaces/product.interface'
 import { useSearchParams } from 'next/navigation'
+import { FC } from 'react'
 import useSWR from 'swr'
+import { SearchResultsProps } from './SearchResults.props'
 
 const fetchCourses = async (url: string) => {
 	const response = await fetch(url)
@@ -16,7 +18,7 @@ const fetchCourses = async (url: string) => {
 	return response.json()
 }
 
-function SearchResults() {
+const SearchResults: FC<SearchResultsProps> = () => {
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
 	const encodedSearch = encodeURI(searchQuery || '')

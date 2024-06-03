@@ -1,10 +1,12 @@
 'use client'
-import React from 'react'
+import React, { FC } from 'react'
 import { SyncLoader } from 'react-spinners'
+import { SpinnerProps } from './Spinner..props'
+import { cvaWrapper } from './SpinnerStyle'
 
-const Spinner = () => {
+const Spinner: FC<SpinnerProps> = () => {
 	return (
-		<div className='flex items-center justify-center h-full w-full'>
+		<div className={cvaWrapper()}>
 			<SyncLoader color='#7351f5' speedMultiplier={1} />
 		</div>
 	)

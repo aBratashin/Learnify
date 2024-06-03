@@ -4,7 +4,9 @@ import CourseForm from '@/components/CourseForm/CourseForm'
 import Spinner from '@/components/Spinner/Spinner'
 import { ProductModel } from '@/interfaces/product.interface'
 import { useSearchParams } from 'next/navigation'
+import { FC } from 'react'
 import useSWR from 'swr'
+import { EditResultsProps } from './EditResults.props'
 
 const fetchCourses = async (url: string) => {
 	const response = await fetch(url)
@@ -16,7 +18,7 @@ const fetchCourses = async (url: string) => {
 	return response.json()
 }
 
-const EditResults = () => {
+const EditResults: FC<EditResultsProps> = () => {
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
 	const encodedSearch = encodeURI(searchQuery || '')

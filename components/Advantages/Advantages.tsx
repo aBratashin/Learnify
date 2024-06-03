@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { advantagesProps } from './Advantages.props'
-import CheckIcon from './Check.svg'
+import CheckIcon from './check.svg'
 import { cvaTitle, cvaWrapper, cvaDescription } from './AdvantagesStyle'
 
 const Advantages: FC<advantagesProps> = ({ advantages }) => {

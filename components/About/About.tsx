@@ -1,30 +1,40 @@
-import React from 'react'
+import { FC } from 'react'
+import { aboutProps } from './About.props'
+import {
+	cvaContainer,
+	cvaItem,
+	cvaItemText,
+	cvaItemTitle,
+	cvaTitle,
+	cvaWhy,
+	cvaWrapper
+} from './AboutStyle'
 
-const About = () => {
+const About: FC<aboutProps> = () => {
 	return (
-		<div className='grid grid-cols-1 xl:grid-cols-2 gap-10 mt-5 mb-14'>
-			<div className='p-4'>
-				<h2 className='text-black font-bold text-2xl xl:text-4xl lg:text-3xl'>
+		<div className={cvaWrapper()}>
+			<div className={cvaWhy()}>
+				<h2 className={cvaTitle()}>
 					Почему выбирают образовательную платформу Learn
 					<span className='text-primary'>ify</span>
 				</h2>
 			</div>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-				<div className='p-4 shadow-lg rounded-3xl'>
-					<h2 className='text-3xl font-bold'>200+</h2>
-					<p className='font-medium'>Образовательный курсов</p>
+			<div className={cvaContainer()}>
+				<div className={cvaItem()}>
+					<h2 className={cvaItemTitle()}>200+</h2>
+					<p className={cvaItemText()}>Образовательный курсов</p>
 				</div>
-				<div className='p-4 shadow-lg rounded-3xl'>
-					<h2 className='text-3xl font-bold'>5+</h2>
-					<p className='font-medium'>Образовательный платформ</p>
+				<div className={cvaItem()}>
+					<h2 className={cvaItemTitle()}>5+</h2>
+					<p className={cvaItemText()}>Образовательный платформ</p>
 				</div>
-				<div className='p-4 shadow-lg rounded-3xl'>
-					<h2 className='text-3xl font-bold'>24/7</h2>
-					<p className='font-medium'>Учеба по своему графику</p>
+				<div className={cvaItem()}>
+					<h2 className={cvaItemTitle()}>24/7</h2>
+					<p className={cvaItemText()}>Учеба по своему графику</p>
 				</div>
-				<div className='p-4 shadow-lg rounded-3xl'>
-					<h2 className='text-3xl font-bold'>93%</h2>
-					<p className='font-medium'>Положительных отзывов</p>
+				<div className={cvaItem()}>
+					<h2 className={cvaItemTitle()}>93%</h2>
+					<p className={cvaItemText()}>Положительных отзывов</p>
 				</div>
 			</div>
 		</div>

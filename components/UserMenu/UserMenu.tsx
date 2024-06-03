@@ -2,17 +2,23 @@
 
 import useLoginModal from '@/hooks/useLoginModal'
 import useRegisterModal from '@/hooks/useRegisterModal'
-import { SafeUser } from '@/interfaces'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import Avatar from '../Avatar/Avatar'
 import MenuItem from '../MenuItem/MenuItem'
-import { useRouter } from 'next/navigation'
-
-interface UserMenuProps {
-	currentUser?: SafeUser | null
-}
+import { UserMenuProps } from './UserMenu.props'
+import {
+	cvaAccount,
+	cvaContainer,
+	cvaHr,
+	cvaInfo,
+	cvaModal,
+	cvaModalOpen,
+	cvaModalOpenContainer,
+	cvaWrapper
+} from './UserMenuStyle'
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal()
@@ -25,15 +31,12 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 	}, [])
 
 	return (
-		<div className='relative'>
-			<div className='flex flex-row items-center gap-3'>
-				<div
-					onClick={toggleOpen}
-					className='w-full p-4 md:py-1 px-2 border-[1px] border-neutral-200 flex items-center justify-between gap-4 rounded-md cursor-pointer hover:shadow-md transition max-h-[50px]'
-				>
-					<div className='flex items-center justify-center gap-4'>
+		<div className={cvaWrapper()}>
+			<div className={cvaContainer()}>
+				<div onClick={toggleOpen} className={cvaModal()}>
+					<div className={cvaInfo()}>
 						<Avatar src={currentUser?.image} />
-						<div className='text-sm font-semibold rounded-full hover:bg-neutral-100 transition cursor-pointer'>
+						<div className={cvaAccount()}>
 							{currentUser?.email ? (
 								<span>{currentUser.name}</span>
 							) : (
@@ -46,8 +49,8 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 			</div>
 
 			{isOpen && (
-				<div className='absolute rounded-md shadow-md w-full bg-white overflow-hidden left-0 top-14 text-sm'>
-					<div className='flex flex-col cursor-pointer'>
+				<div className={cvaModalOpen()}>
+					<div className={cvaModalOpenContainer()}>
 						{currentUser ? (
 							<>
 								<MenuItem
@@ -62,11 +65,11 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 									onClick={() => router.push('/bought')}
 									label='Ваши курсы'
 								/>
-								<hr className='opacity-20' />
+								<hr className={cvaHr()} />
 								<MenuItem onClick={() => signOut()} label='Выйти' />
 								{currentUser.role === 'Admin' && (
 									<>
-										<hr className='opacity-20' />
+										<hr className={cvaHr()} />
 										<MenuItem
 											onClick={() => router.push('/contacts')}
 											label='Заявки'

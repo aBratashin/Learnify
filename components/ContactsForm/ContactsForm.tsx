@@ -1,13 +1,24 @@
 'use client'
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
-import { ContactStatus } from '@prisma/client'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { ContactsFormProps } from './ContactsForm.props'
+import {
+	cvaButton,
+	cvaContainer,
+	cvaForm,
+	cvaInfoText,
+	cvaInfoTitle,
+	cvaInput,
+	cvaInputContainer,
+	cvaWrapper
+} from './ContactsFormStyle'
 
-const ContactsForm = () => {
+const ContactsForm: FC<ContactsFormProps> = () => {
 	interface IContact {
 		name: string
 		phone: string
@@ -38,29 +49,27 @@ const ContactsForm = () => {
 	}
 
 	return (
-		<div className='w-full p-10 bg-yellow-200 rounded-xl flex justify-center items-center flex-col lg:flex-row lg:items-start gap-10'>
-			<div className='grow w-full lg:w-1/2'>
-				<h1 className='text-black font-bold text-2xl xl:text-4xl lg:text-3xl'>
-					Поможем решить все вопросы
-				</h1>
-				<p className='mt-5 text-md'>
+		<div className={cvaWrapper()}>
+			<div className={cvaContainer()}>
+				<h1 className={cvaInfoTitle()}>Поможем решить все вопросы</h1>
+				<p className={cvaInfoText()}>
 					Если вы хотите больше узнать о Learnify или не знаете, какую программу
 					обучения выбрать, оставьте заявку — и мы перезвоним
 				</p>
 			</div>
-			<div className='grow w-full lg:w-1/2'>
-				<form className='flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
+			<div className={cvaContainer()}>
+				<form className={cvaForm()} onSubmit={handleSubmit(onSubmit)}>
 					<Input
-						className='[&>input]:w-full [&>input]:h-12'
+						className={cvaInput()}
 						{...register('name', {
 							required: { value: true, message: 'Заполните имя' }
 						})}
 						placeholder='Имя'
 						error={errors.name}
 					/>
-					<div className='flex gap-5 flex-col xl:flex-row'>
+					<div className={cvaInputContainer()}>
 						<Input
-							className='grow [&>input]:w-full [&>input]:h-12'
+							className={cvaInput()}
 							{...register('phone', {
 								required: { value: true, message: 'Заполните телефон' },
 								pattern: {
@@ -73,7 +82,7 @@ const ContactsForm = () => {
 							error={errors.phone}
 						/>
 						<Input
-							className='grow [&>input]:w-full [&>input]:h-12'
+							className={cvaInput()}
 							{...register('email', {
 								required: { value: true, message: 'Заполните почту' },
 								pattern: {
@@ -85,7 +94,7 @@ const ContactsForm = () => {
 							error={errors.email}
 						/>
 					</div>
-					<Button className='self-center w-1/2' appearance='primary'>
+					<Button className={cvaButton()} appearance='primary'>
 						Отправить
 					</Button>
 				</form>

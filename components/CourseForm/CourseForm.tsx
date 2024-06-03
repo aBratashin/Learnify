@@ -1,6 +1,7 @@
 'use client'
-import { MenuData } from '@/helpers/MenuData'
 import Button from '@/components/Button/Button'
+import { MenuData } from '@/helpers/MenuData'
+import { declOfNum } from '@/helpers/helpers'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
@@ -13,7 +14,16 @@ import Spinner from '../Spinner/Spinner'
 import Textarea from '../Textarea/Textarea'
 import { documentOptionsData, imageOptionsData } from './CourseForm.data'
 import { CourseFormProps, IContact } from './CourseForm.props'
-import { declOfNum } from '@/helpers/helpers'
+import {
+	cvaButton,
+	cvaContainer,
+	cvaContainerRelative,
+	cvaInput,
+	cvaInputGrow,
+	cvaSpanError,
+	cvaTextarea,
+	cvaWrapper
+} from './CourseFormStyle'
 
 const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 	const router = useRouter()
@@ -157,14 +167,14 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 
 	return (
 		<>
-			<div className='flex flex-col gap-8'>
+			<div className={cvaWrapper()}>
 				<H tag='h1'>{edit ? 'Редактировать курс' : 'Добавить курс'}</H>
-				<form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
-					<div className='flex flex-col gap-2'>
+				<form className={cvaWrapper()} onSubmit={handleSubmit(onSubmit)}>
+					<div className={cvaContainer()}>
 						<label htmlFor='title'>Название:</label>
 						<Input
 							id='title'
-							className='[&>input]:w-full'
+							className={cvaInput()}
 							{...register('title', {
 								required: { value: true, message: 'Заполните название' }
 							})}
@@ -172,11 +182,11 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 							error={errors.title}
 						/>
 					</div>
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='link'>Ссылка:</label>
 						<Input
 							id='link'
-							className='grow [&>input]:w-full'
+							className={cvaInputGrow()}
 							{...register('link', {
 								required: { value: true, message: 'Заполните ссылку' },
 								pattern: {
@@ -190,11 +200,11 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 							error={errors.link}
 						/>
 					</div>
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='price'>Цена:</label>
 						<Input
 							id='price'
-							className='[&>input]:w-full'
+							className={cvaInput()}
 							{...register('price', {
 								required: { value: true, message: 'Заполните цену' }
 							})}
@@ -203,11 +213,11 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 							type='number'
 						/>
 					</div>
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='complexity'>Сложность:</label>
 						<Input
 							id='complexity'
-							className='grow [&>input]:w-full'
+							className={cvaInputGrow()}
 							{...register('complexity', {
 								required: { value: true, message: 'Заполните сложность' }
 							})}
@@ -216,11 +226,11 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 							error={errors.complexity}
 						/>
 					</div>
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='duration'>Длительность:</label>
 						<Input
 							id='duration'
-							className='[&>input]:w-full'
+							className={cvaInput()}
 							{...register('duration', {
 								required: {
 									value: true,
@@ -234,7 +244,7 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 					</div>
 					{isMounted ? (
 						<>
-							<div className='relative flex flex-col gap-2'>
+							<div className={cvaContainerRelative()}>
 								<label htmlFor='documentType'>Документ об окончании:</label>
 								<Controller
 									name='documentType'
@@ -260,12 +270,12 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 									)}
 								/>
 								{errors.documentType && (
-									<span className='absolute bottom-[-20px] left-0 text-red'>
+									<span className={cvaSpanError()}>
 										{errors.documentType.message}
 									</span>
 								)}
 							</div>
-							<div className='relative flex flex-col gap-2'>
+							<div className={cvaContainerRelative()}>
 								<label htmlFor='image'>Школа:</label>
 								<Controller
 									name='image'
@@ -287,12 +297,10 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 									)}
 								/>
 								{errors.image && (
-									<span className='absolute bottom-[-20px] left-0 text-red'>
-										{errors.image.message}
-									</span>
+									<span className={cvaSpanError()}>{errors.image.message}</span>
 								)}
 							</div>
-							<div className='relative flex flex-col gap-2'>
+							<div className={cvaContainerRelative()}>
 								<label htmlFor='category'>Категория:</label>
 								<Controller
 									name='categories'
@@ -322,38 +330,34 @@ const CourseForm: FC<CourseFormProps> = ({ edit, course }) => {
 									)}
 								/>
 								{errors.categories && (
-									<span className='absolute bottom-[-20px] left-0 text-red'>
+									<span className={cvaSpanError()}>
 										{errors.categories.message}
 									</span>
 								)}
 							</div>
 						</>
 					) : null}
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='description'>Описание:</label>
 						<Textarea
 							id='description'
-							className='[&>textarea]:h-20'
+							className={cvaTextarea()}
 							{...register('description')}
 							placeholder='Введите описание (необязательно)'
 							error={errors.description}
 						/>
 					</div>
-					<div className='flex flex-col gap-2'>
+					<div className={cvaContainer()}>
 						<label htmlFor='advantages'>Преимущества:</label>
 						<Textarea
 							id='advantages'
-							className='[&>textarea]:h-20'
+							className={cvaTextarea()}
 							{...register('advantages')}
 							placeholder='Введите преимущества (необязательно)'
 							error={errors.advantages}
 						/>
 					</div>
-					<Button
-						className='self-center w-1/2'
-						appearance='primary'
-						type='submit'
-					>
+					<Button className={cvaButton()} appearance='primary' type='submit'>
 						{edit ? 'Редактировать курс' : 'Создать курс'}
 					</Button>
 				</form>

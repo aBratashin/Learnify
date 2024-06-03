@@ -5,11 +5,8 @@ import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import toast from 'react-hot-toast'
 import { MdDelete } from 'react-icons/md'
-
-interface DeleteButtonProps {
-	id: string
-	isReview?: boolean
-}
+import { DeleteButtonProps } from './DeleteButton.props'
+import { cvaIcon, cvaWrapper } from './DeleteButtonStyle'
 
 const DeleteButton: FC<DeleteButtonProps> = ({ id, isReview = false }) => {
 	const router = useRouter()
@@ -29,11 +26,11 @@ const DeleteButton: FC<DeleteButtonProps> = ({ id, isReview = false }) => {
 	return (
 		<div
 			onClick={() => handleDelete(id)}
-			className='relative hover:opacity-80 transition cursor-pointer'
+			className={cvaWrapper()}
 			title={isReview ? 'Удалить отзыв' : 'Удалить курс'}
 			aria-label={isReview ? 'Удалить отзыв' : 'Удалить курс'}
 		>
-			<MdDelete size={30} className='text-red-light' />
+			<MdDelete size={30} className={cvaIcon()} />
 		</div>
 	)
 }

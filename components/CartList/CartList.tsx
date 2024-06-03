@@ -1,24 +1,25 @@
 'use client'
-import { sortReducer } from '@/components/top-page/sort.reducer'
-import { priceRu } from '@/helpers/helpers'
-import { SafeUser } from '@/interfaces'
-import { ProductModel } from '@/interfaces/product.interface'
 import H from '@/components/H/H'
 import Product from '@/components/Product/Product'
 import Sort from '@/components/Sort/Sort'
 import { SortEnum } from '@/components/Sort/Sort.props'
 import Tag from '@/components/Tag/Tag'
+import { sortReducer } from '@/components/top-page/sort.reducer'
+import { priceRu } from '@/helpers/helpers'
 import axios from 'axios'
 import { useReducedMotion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { FC, useEffect, useReducer } from 'react'
 import toast from 'react-hot-toast'
-import Button from '../Button/Button'
-
-interface CartListProps {
-	products: ProductModel[]
-	currentUser?: SafeUser | null
-}
+import { CartListProps } from './CartList.props'
+import {
+	cvaButton,
+	cvaErrorContainer,
+	cvaErrorSubtitle,
+	cvaErrorTitle,
+	cvaPrice,
+	cvaWrapper
+} from './CartListStyle'
 
 const CartList: FC<CartListProps> = ({ products, currentUser }) => {
 	const router = useRouter()
@@ -43,11 +44,9 @@ const CartList: FC<CartListProps> = ({ products, currentUser }) => {
 
 	if (products.length === 0) {
 		return (
-			<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center'>
-				<h1 className='font-bold text-2xl'>
-					У Вас отсутствуют курсы в корзине!
-				</h1>
-				<h2 className='font-normal text-md'>
+			<div className={cvaErrorContainer()}>
+				<h1 className={cvaErrorTitle()}>У Вас отсутствуют курсы в корзине!</h1>
+				<h2 className={cvaErrorSubtitle()}>
 					Добавьте курс в корзину для отображения
 				</h2>
 			</div>
@@ -71,7 +70,7 @@ const CartList: FC<CartListProps> = ({ products, currentUser }) => {
 
 	return (
 		<div>
-			<div className='grid grid-cols-[auto,1fr] items-center justify-items-start gap-5 mb-[30px] sm:grid-cols-[auto,1fr,auto]'>
+			<div className={cvaWrapper()}>
 				<H tag='h1'>Корзина</H>
 				{products && (
 					<Tag
@@ -84,12 +83,9 @@ const CartList: FC<CartListProps> = ({ products, currentUser }) => {
 				)}
 				<Sort sort={sort} setSort={setSort} />
 			</div>
-			<div className='flex flex-col items-start justify-start gap-5 sm:flex-row sm:items-center sm:justify-between'>
+			<div className={cvaPrice()}>
 				<H tag='h1'>К оплате: {priceRu(total)}</H>
-				<button
-					onClick={handlePay}
-					className='bg-rose-500 w-[200px] h-10 text-white rounded-md hover:scale-105 transition-all'
-				>
+				<button onClick={handlePay} className={cvaButton()}>
 					Купить
 				</button>
 			</div>

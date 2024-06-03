@@ -1,20 +1,19 @@
 'use client'
-import { sortReducer } from '@/components/top-page/sort.reducer'
-import { SafeUser } from '@/interfaces'
-import { ProductModel } from '@/interfaces/product.interface'
 import H from '@/components/H/H'
 import Product from '@/components/Product/Product'
 import Sort from '@/components/Sort/Sort'
 import { SortEnum } from '@/components/Sort/Sort.props'
 import Tag from '@/components/Tag/Tag'
+import { sortReducer } from '@/components/top-page/sort.reducer'
 import { useReducedMotion } from 'framer-motion'
 import { FC, useEffect, useReducer } from 'react'
-
-interface SearchListProps {
-	products: ProductModel[]
-	currentUser?: SafeUser | null
-	title: string | null
-}
+import { SearchListProps } from './SearchList.props'
+import {
+	cvaErrorContainer,
+	cvaErrorSubtitle,
+	cvaErrorTitle,
+	cvaWrapper
+} from './SearchListStyle'
 
 const SearchList: FC<SearchListProps> = ({ products, currentUser, title }) => {
 	const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
@@ -37,11 +36,11 @@ const SearchList: FC<SearchListProps> = ({ products, currentUser, title }) => {
 
 	if (products.length === 0) {
 		return (
-			<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center'>
-				<h1 className='font-bold text-2xl'>
+			<div className={cvaErrorContainer()}>
+				<h1 className={cvaErrorTitle()}>
 					По Вашему запросу ничего не найдено!
 				</h1>
-				<h2 className='font-normal text-md'>
+				<h2 className={cvaErrorSubtitle()}>
 					Попробуйте поменять параметры поиска
 				</h2>
 			</div>
@@ -50,7 +49,7 @@ const SearchList: FC<SearchListProps> = ({ products, currentUser, title }) => {
 
 	return (
 		<div>
-			<div className='grid grid-cols-[auto,1fr] items-center justify-items-start gap-5 mb-[30px] sm:grid-cols-[auto,1fr,auto]'>
+			<div className={cvaWrapper()}>
 				<H tag='h1'>Поиск: {title}</H>
 				{products && (
 					<Tag

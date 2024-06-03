@@ -16,7 +16,7 @@ const notoSans = Noto_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: 'Learnify',
-	description: 'Learnify'
+	description: 'Learnify courses'
 }
 
 export default async function RootLayout({

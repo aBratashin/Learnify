@@ -1,20 +1,22 @@
 'use client'
-import { sortReducer } from '@/components/top-page/sort.reducer'
-import { SafeUser } from '@/interfaces'
-import { ProductModel } from '@/interfaces/product.interface'
 import H from '@/components/H/H'
 import Product from '@/components/Product/Product'
 import Sort from '@/components/Sort/Sort'
 import { SortEnum } from '@/components/Sort/Sort.props'
 import Tag from '@/components/Tag/Tag'
+import { sortReducer } from '@/components/top-page/sort.reducer'
 import { useReducedMotion } from 'framer-motion'
 import { FC, useEffect, useReducer, useState } from 'react'
 import Search from '../Search/Search'
-
-interface ManageListProps {
-	products: ProductModel[]
-	currentUser?: SafeUser | null
-}
+import { ManageListProps } from './ManageList.props'
+import {
+	cvaContainer,
+	cvaErrorContainer,
+	cvaErrorSubtitle,
+	cvaErrorTitle,
+	cvaSearch,
+	cvaWrapper
+} from './ManageListStyle'
 
 const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 	const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
@@ -49,8 +51,8 @@ const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 	}, [products])
 
 	return (
-		<div className='flex flex-col'>
-			<div className='grid grid-cols-[auto,1fr] items-center justify-items-start gap-5 mb-[30px] sm:grid-cols-[auto,1fr,auto]'>
+		<div className={cvaWrapper()}>
+			<div className={cvaContainer()}>
 				<H tag='h1'>Управление курсами</H>
 				{products && (
 					<Tag
@@ -67,7 +69,7 @@ const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 				manage
 				value={searchTerm}
 				onChange={handleSearch}
-				className='!w-[200px] self-start sm:self-end'
+				className={cvaSearch()}
 			/>
 			{filteredProducts.length ? (
 				<div role='list'>
@@ -83,11 +85,11 @@ const ManageList: FC<ManageListProps> = ({ products, currentUser }) => {
 					))}
 				</div>
 			) : (
-				<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center mt-96'>
-					<h1 className='font-bold text-2xl'>
+				<div className={cvaErrorContainer()}>
+					<h1 className={cvaErrorTitle()}>
 						По Вашему запросу ничего не найдено!
 					</h1>
-					<h2 className='font-normal text-md'>
+					<h2 className={cvaErrorSubtitle()}>
 						Попробуйте поменять параметры поиска
 					</h2>
 				</div>

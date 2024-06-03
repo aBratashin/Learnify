@@ -1,19 +1,19 @@
 'use client'
-import { sortReducer } from '@/components/top-page/sort.reducer'
-import { SafeUser } from '@/interfaces'
-import { ProductModel } from '@/interfaces/product.interface'
 import H from '@/components/H/H'
 import Product from '@/components/Product/Product'
 import Sort from '@/components/Sort/Sort'
 import { SortEnum } from '@/components/Sort/Sort.props'
 import Tag from '@/components/Tag/Tag'
+import { sortReducer } from '@/components/top-page/sort.reducer'
 import { useReducedMotion } from 'framer-motion'
 import { FC, useEffect, useReducer } from 'react'
-
-interface FavoritesListProps {
-	products: ProductModel[]
-	currentUser?: SafeUser | null
-}
+import { FavoritesListProps } from './FavoriteList.props'
+import {
+	cvaErrorContainer,
+	cvaErrorSubtitle,
+	cvaErrorTitle,
+	cvaWrapper
+} from './FavoriteListStyle'
 
 const FavoritesList: FC<FavoritesListProps> = ({ products, currentUser }) => {
 	const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
@@ -36,11 +36,9 @@ const FavoritesList: FC<FavoritesListProps> = ({ products, currentUser }) => {
 
 	if (products.length === 0) {
 		return (
-			<div className='flex flex-col items-center justify-center gap-2 h-full w-full text-center'>
-				<h1 className='font-bold text-2xl'>
-					У Вас отсутствуют избранные курсы!
-				</h1>
-				<h2 className='font-normal text-md'>
+			<div className={cvaErrorContainer()}>
+				<h1 className={cvaErrorTitle()}>У Вас отсутствуют избранные курсы!</h1>
+				<h2 className={cvaErrorSubtitle()}>
 					Добавьте курс в избранное для отображения
 				</h2>
 			</div>
@@ -49,7 +47,7 @@ const FavoritesList: FC<FavoritesListProps> = ({ products, currentUser }) => {
 
 	return (
 		<div>
-			<div className='grid grid-cols-[auto,1fr] items-center justify-items-start gap-5 mb-[30px] sm:grid-cols-[auto,1fr,auto]'>
+			<div className={cvaWrapper()}>
 				<H tag='h1'>Избранное</H>
 				{products && (
 					<Tag
