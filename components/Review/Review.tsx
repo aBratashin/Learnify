@@ -23,7 +23,7 @@ const Review: FC<ReviewProps> = ({ review, manage, className, ...props }) => {
 			<UserIcon className={classes.user} />
 			<div className={classes.title}>
 				<span className={classes.name}>{name}:</span>&nbsp;&nbsp;
-				<span>{title}</span>
+				<span className={classes.title}>{title}</span>
 			</div>
 			<div className={classes.date}>
 				{format(new Date(createdAt), 'dd MMM yyyy', { locale: ru })}

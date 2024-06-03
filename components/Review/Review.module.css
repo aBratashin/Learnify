@@ -31,6 +31,11 @@
 	font-weight: bold;
 }
 
+.title,
+.name {
+	word-break: bread-word;
+}
+
 .heart {
 	grid-column: delstart / end;
 }

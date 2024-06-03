@@ -8,4 +8,4 @@ export const cvaInput = cva([
 
 export const cvaInputError = cva(['outline-red'])
 
-export const cvaInputSpan = cva(['absolute bottom-[-20px] left-0 text-red'])
+export const cvaInputSpan = cva(['absolute bottom-[-20px] left-0 text-red '])

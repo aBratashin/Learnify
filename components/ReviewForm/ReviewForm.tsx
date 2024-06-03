@@ -58,7 +58,7 @@ const ReviewForm: FC<ReviewFormProps> = ({
 				<Input
 					{...register('name', {
 						required: { value: true, message: 'Заполните имя' },
-						maxLength: { value: 10, message: 'Макс длина - 10 символов' }
+						maxLength: { value: 30, message: 'Макс длина - 30 символов' }
 					})}
 					placeholder='Имя'
 					className={'[&>input]:w-full'}
