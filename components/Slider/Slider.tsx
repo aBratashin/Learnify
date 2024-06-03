@@ -13,6 +13,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
+import { SliderProps } from './Slider.props'
 import {
 	cvaContainer,
 	cvaSwiper,
@@ -23,7 +24,7 @@ import {
 	cvaWrapper
 } from './SliderStyle'
 
-const Slider:FC<> = () => {
+const Slider: FC<SliderProps> = () => {
 	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperTypes | null>(null)
 
 	return (
