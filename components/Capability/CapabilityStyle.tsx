@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva } from 'class-variance-authority'
 
 export const cvaWrapper = cva([
 	'w-full p-8 bg-primary border-purple border-solid rounded-xl flex flex-col gap-10 shadow-lg'

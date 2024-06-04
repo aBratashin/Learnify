@@ -1,5 +1,5 @@
-import { SafeUser } from "@/interfaces"
-import { ProductModel } from "@/interfaces/product.interface"
+import { SafeUser } from '@/interfaces'
+import { ProductModel } from '@/interfaces/product.interface'
 
 export interface CartListProps {
 	products: ProductModel[]

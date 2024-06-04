@@ -15,11 +15,11 @@ export const authOptions: AuthOptions = {
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID!,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET!
 		}),
 		YandexProvider({
 			clientId: process.env.YANDEX_CLIENT_ID!,
-			clientSecret: process.env.YANDEX_CLIENT_SECRET!,
+			clientSecret: process.env.YANDEX_CLIENT_SECRET!
 		}),
 		CredentialsProvider({
 			name: 'credentials',

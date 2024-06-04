@@ -15,6 +15,7 @@ import {
 	cvaInfoTitle,
 	cvaInput,
 	cvaInputContainer,
+	cvaInputGrow,
 	cvaWrapper
 } from './ContactsFormStyle'
 
@@ -69,12 +70,12 @@ const ContactsForm: FC<ContactsFormProps> = () => {
 					/>
 					<div className={cvaInputContainer()}>
 						<Input
-							className={cvaInput()}
+							className={cvaInputGrow()}
 							{...register('phone', {
 								required: { value: true, message: 'Заполните телефон' },
 								pattern: {
 									value: /^((\+7|7|8)+([0-9]){10})$/,
-									message: 'Введите корректный телефон!'
+									message: 'Телефон некорректен!'
 								}
 							})}
 							type='tel'
@@ -82,12 +83,12 @@ const ContactsForm: FC<ContactsFormProps> = () => {
 							error={errors.phone}
 						/>
 						<Input
-							className={cvaInput()}
+							className={cvaInputGrow()}
 							{...register('email', {
 								required: { value: true, message: 'Заполните почту' },
 								pattern: {
 									value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-									message: 'Введите корректную почту!'
+									message: 'Почта некорректна!'
 								}
 							})}
 							placeholder='Почта'
