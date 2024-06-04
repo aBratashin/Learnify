@@ -36,7 +36,7 @@ const Header: FC<HeaderProps> = ({ currentUser, className, ...props }) => {
 
 	return (
 		<header className={classNames(className, classes.header)} {...props}>
-			<Logo onClick={() => router.push('/')} className='cursor-pointer' />
+			<Logo onClick={() => router.push('/')} className={classes.logo} />
 			<ButtonIcon
 				aria-label='Кнопка бургер-меню'
 				appearance='white'

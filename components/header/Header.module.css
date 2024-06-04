@@ -24,6 +24,10 @@
 	right: 15px;
 }
 
+.logo {
+	cursor: pointer;
+}
+
 @media (max-width: 765px) {
 	.header {
 		display: grid;
