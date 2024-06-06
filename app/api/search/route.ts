@@ -1,3 +1,4 @@
+import getCurrentUser from '@/actions/getCurrentUser'
 import prisma from '@/configs/prismadb'
 import { NextResponse } from 'next/server'
 
@@ -5,6 +6,7 @@ export async function GET(req: Request) {
 	try {
 		const url = new URL(req.url)
 		const searchParams = url.searchParams.get('q')
+		const currentUser = await getCurrentUser()
 
 		if (typeof searchParams !== 'string' || !searchParams) {
 			throw new Error('Ошибка в запросе')
@@ -32,7 +34,7 @@ export async function GET(req: Request) {
 			}
 		})
 
-		return NextResponse.json({ courses })
+		return NextResponse.json({ courses, currentUser })
 	} catch (error) {
 		return NextResponse.json(
 			{ error: 'Ошибка обработки запроса' },

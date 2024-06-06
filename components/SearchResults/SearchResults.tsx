@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { FC } from 'react'
 import useSWR from 'swr'
 import { SearchResultsProps } from './SearchResults.props'
+import { SafeUser } from '@/interfaces'
 
 const fetchCourses = async (url: string) => {
 	const response = await fetch(url)
@@ -23,7 +24,7 @@ const SearchResults: FC<SearchResultsProps> = () => {
 	const searchQuery = searchParams.get('q')
 	const encodedSearch = encodeURI(searchQuery || '')
 
-	const { data } = useSWR<{ courses: Array<ProductModel> }>(
+	const { data } = useSWR<{ courses: Array<ProductModel>, currentUser: SafeUser | null }>(
 		() => (searchQuery ? `/api/search?q=${encodedSearch}` : null),
 		fetchCourses
 	)
@@ -36,7 +37,7 @@ const SearchResults: FC<SearchResultsProps> = () => {
 		return <Spinner />
 	}
 
-	return <SearchList products={data.courses} title={searchQuery} />
+	return <SearchList products={data.courses} title={searchQuery} currentUser={data.currentUser}/>
 }
 
 export default SearchResults
