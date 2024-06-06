@@ -26,7 +26,8 @@ const SearchResults: FC<SearchResultsProps> = () => {
 
 	const { data } = useSWR<{ courses: Array<ProductModel>, currentUser: SafeUser | null }>(
 		() => (searchQuery ? `/api/search?q=${encodedSearch}` : null),
-		fetchCourses
+		fetchCourses,
+		{refreshInterval: 1000}
 	)
 
 	if (searchQuery === null) {
